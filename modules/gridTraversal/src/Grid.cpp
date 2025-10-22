@@ -2,14 +2,17 @@
 
 #include "GridImpl.h"
 
-Grid::Grid(uint16_t rows, uint16_t columns, const std::list<CellPosition>& blocked_cells)
+namespace gridtraversal
+{
+Grid::Grid(size_t rows, size_t columns, const std::vector<CellPosition>& blocked_cells)
     : impl(std::make_unique<GridImpl>(rows, columns, blocked_cells))
 {
 }
 
 Grid::~Grid() = default;
 
-void Grid::solveAndPrintSolution(uint16_t number_of_moves) const
+void Grid::solveAndPrintSolution(size_t number_of_moves) const
 {
   impl->solveAndPrintSolution(number_of_moves);
 }
+}  // namespace gridtraversal

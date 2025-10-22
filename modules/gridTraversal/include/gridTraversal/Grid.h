@@ -1,12 +1,13 @@
 #ifndef GRID_H
 #define GRID_H
 
-#include <cstdint>
-#include <list>
 #include <memory>
+#include <vector>
 
 #include "CellPosition.h"
 
+namespace gridtraversal
+{
 class GridImpl;
 
 /// @brief A class representing a Grid
@@ -17,15 +18,17 @@ class Grid
   /// @param rows number of rows
   /// @param columns number of columns
   /// @param blocked_cells list of blocked cells
-  Grid(uint16_t rows, uint16_t columns, const std::list<CellPosition>& blocked_cells);
+  Grid(size_t rows, size_t columns, const std::vector<CellPosition>& blocked_cells);
   ~Grid();
 
   /// @brief A method that calculates and prints the solution in the std::cout stream depending on
   /// the given number of moves
-  void solveAndPrintSolution(uint16_t number_of_moves) const;
+  /// @param number_of_moves
+  void solveAndPrintSolution(size_t number_of_moves) const;
 
  private:
   std::unique_ptr<GridImpl> impl;
 };
+}  // namespace gridtraversal
 
 #endif  // GRID_H

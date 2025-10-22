@@ -1,22 +1,23 @@
 #ifndef CELL_POSITION_H
 #define CELL_POSITION_H
 
-#include <cstdint>
 #include <ostream>
 
-/// @brief
+namespace gridtraversal
+{
+/// @brief A structure representing single cell coordinates
 struct CellPosition
 {
-  /// @brief x coordinate position
-  uint16_t x;
+  /// @brief row number
+  int row;
 
-  /// @brief y coordinate position
-  uint16_t y;
+  /// @brief column number
+  int col;
 
   /// @brief CellPosition ctor
-  /// @param x_ x coordinate position
-  /// @param y_ y coordinate position
-  CellPosition(uint16_t x_, uint16_t y_) : x(x_), y(y_)
+  /// @param row_ row number
+  /// @param y_ col number
+  CellPosition(int row_, int col_) : row(row_), col(col_)
   {
   }
 
@@ -25,7 +26,12 @@ struct CellPosition
   /// @return returns true if the positions are the same
   bool operator==(const CellPosition& other) const
   {
-    return x == other.x && y == other.y;
+    return row == other.row && col == other.col;
+  }
+
+  bool operator<(const CellPosition& other) const
+  {
+    return (row < other.row) || (row == other.row && col < other.col);
   }
 
   /// @brief An operator printing positions in the style '(x,y)'
@@ -34,8 +40,9 @@ struct CellPosition
   /// @return
   friend std::ostream& operator<<(std::ostream& stream, const CellPosition& cellPosition)
   {
-    return stream << "(" << cellPosition.x << "," << cellPosition.y << ")";
+    return stream << "(" << cellPosition.row << "," << cellPosition.col << ")";
   }
 };
+}  // namespace gridtraversal
 
 #endif  // CELL_POSITION_H
